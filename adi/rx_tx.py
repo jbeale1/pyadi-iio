@@ -334,14 +334,16 @@ class rx(rx_tx_common):
         if isinstance(self._rx_data_type, list):
             return self.__multi_type_rx(data)
 
-        x = np.frombuffer(data, dtype=self._rx_data_type)
-        if self._rx_mask != 0:
-            x = np.bitwise_and(x, self._rx_mask)
-        if self._rx_shift > 0:
-            x = np.right_shift(x, self._rx_shift)
-        elif self._rx_shift < 0:
-            x = np.left_shift(x, -(self._rx_shift))
-
+        #x = np.frombuffer(data, dtype=self._rx_data_type)
+        #if self._rx_mask != 0:
+        #    x = np.bitwise_and(x, self._rx_mask)
+        #if self._rx_shift > 0:
+        #    x = np.right_shift(x, self._rx_shift)
+        #elif self._rx_shift < 0:
+        #    x = np.left_shift(x, -(self._rx_shift))
+        
+        x=data # temporary workaround for AD7124 raw data
+        
         sig = []
         stride = len(self.rx_enabled_channels)
 
